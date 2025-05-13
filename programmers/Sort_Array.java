@@ -1,4 +1,4 @@
-// 저자 출제 / 01.배열 정렬하기
+// 저자 출제_01_배열 정렬하기
 
 package programmers;
 import java.util.Arrays;
