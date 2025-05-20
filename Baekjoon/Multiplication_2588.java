@@ -1,7 +1,6 @@
 // 2588_곱셈
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class Multiplication_2588 {
     public static void main(String[] args) throws IOException{
