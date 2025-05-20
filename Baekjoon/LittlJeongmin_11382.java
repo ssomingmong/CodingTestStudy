@@ -1,4 +1,4 @@
-// 11382_꼬마 정민민
+// 11382_꼬마 정민
 
 import java.io.*;
 import java.util.StringTokenizer;
