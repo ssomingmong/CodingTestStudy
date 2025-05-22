@@ -5,25 +5,15 @@ import java.io.*;
 
 public class Counting_10807 {
     public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         int N = Integer.parseInt(br.readLine());
-        int[] arr = new int[N];
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int count = 0;
-
-        for(int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());   
-        }
+        int[] numbers = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
         int v = Integer.parseInt(br.readLine());
 
-        for(int j = 0; j < N; j++) {
-            if(arr[j] == v) {
-                count++;
-            }
-            
-        }
+        long count = Arrays.stream(numbers).filter(num -> num == v).count();
 
         System.out.println(count);
     }
