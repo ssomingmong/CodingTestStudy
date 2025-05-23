@@ -7,7 +7,7 @@ public class NoAssignment_5597 {
     public static void main(String[]args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        int[] students = new int[30];
+        int[] students = new int[30];   
         for(int i = 0; i < students.length; i++) {
             students[i] = i + 1;
         }
@@ -32,3 +32,29 @@ public class NoAssignment_5597 {
     }
 }
 
+
+/* 더 나은 풀이
+
+import java.io.*;
+
+public class NoAssignment_5597 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        boolean[] submitted = new boolean[31]; // 1~30 사용
+
+        // 제출한 학생 번호만 true로 체크
+        for (int i = 0; i < 28; i++) {
+            int num = Integer.parseInt(br.readLine());
+            submitted[num] = true;
+        }
+
+        // 제출 안 한 학생 찾기
+        for (int i = 1; i <= 30; i++) {
+            if (!submitted[i]) {
+                System.out.println(i);
+            }
+        }
+    }
+}
+ */
