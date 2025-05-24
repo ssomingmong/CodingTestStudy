@@ -18,6 +18,6 @@ import java.util.Scanner;
                     System.out.println(string.charAt(0)+""+ string.charAt(string.length() - 1));
                 }
             }
-            
+            sc.close();
         }
     }
