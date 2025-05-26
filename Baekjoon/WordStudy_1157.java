@@ -27,5 +27,6 @@ import java.util.Scanner;
             }
 
             System.out.println(result);
+            sc.close();
         }
     }
