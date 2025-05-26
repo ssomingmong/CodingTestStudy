@@ -15,5 +15,6 @@ class Memorize_triangles {
             System.out.println("Scalene");
         }
         else System.out.println("Error");
+        sc.close();
     }
 }
