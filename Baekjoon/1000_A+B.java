@@ -8,5 +8,6 @@ import java.util.*;
         int a = sc.nextInt(), b = sc.nextInt();
         int c = a+b;
         System.out.println(c);
+        sc.close();
     }
 }
