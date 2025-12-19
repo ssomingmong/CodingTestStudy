@@ -6,12 +6,11 @@ class Node:
 class LinkedList:
     def __init__(self, value):
         self.head = Node(value)
-
+        
     def append(self, value):
         cur = self.head
-        
         while cur.next is not None:
-            cur = self.next
+            cur = cur.next
         
         cur.next = Node(value)
 
@@ -23,4 +22,5 @@ class LinkedList:
 
 linked_list = LinkedList(1)
 linked_list.append(2)
+linked_list.append(3)
 linked_list.print_all()
