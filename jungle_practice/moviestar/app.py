@@ -66,7 +66,13 @@ def show_movies():
     #    TODO: 개봉일 순서 정렬처럼 여러 기준으로 순서대로 정렬해야되는 경우 sort([('A', 1), ('B', 1)]) 처럼 인자를 설정해야 합니다!!!
     #    TODO: 다음 코드에서 likes로 정렬이 정상동작하도록 직접 수정해보세요!!!
     if sortMode == 'likes':
-        movies = list(db.movies.find({'trashed': False}, {}).sort('likes', -1)) # 정렬시 여기를 완성해보세요!!!
+        movies = list(db.movies.find({'trashed': False}, {}).sort('likes', -1))
+    
+    elif sortMode == 'viewers':
+        movies = list(db.movies.find({'trashed': False}, {}).sort('viewers', -1))
+
+    elif sortMode == 'date':
+        movies = list(db.movies.find({'trashed': False}, {}).sort([('open_year', -1), ('open_month', -1), ('open_day', -1)]))
     else:
         return jsonify({'result': 'failure'})
 
@@ -79,15 +85,20 @@ def show_movies():
 def like_movie():
     # 1. movies 목록에서 find_one으로 영화 하나를 찾습니다.
     #    TODO: 영화 하나만 찾도록 다음 코드를 직접 수정해보세요!!!
-    movie = db.movies.find_one({}) # 여기를 완성 해보세요
+    movie_id = request.form.get('id')
+    if not movie_id:
+        return jsonify({'result': 'failure'})
+    
+    movie = db.movies.find_one({'_id': ObjectId(movie_id)}) # 여기를 완성 해보세요
+    if not movie_id:
+        return jsonify({'result': 'failure'})
 
     # 2. movie의 like 에 1을 더해준 new_like 변수를 만듭니다.
     new_likes = movie['likes'] + 1
 
     # 3. movies 목록에서 id 가 매칭되는 영화의 like 를 new_like로 변경합니다.
     #    참고: '$set' 활용하기!
-    #    TODO: 영화 하나의 likes값이 변경되도록 다음 코드를 직접 수정해보세요!!!
-    result = db.movies.update_one({}, {'$set': {'likes': new_likes}}) # 여기를 완성해보세요
+    result = db.movies.update_one({'_id': ObjectId(movie_id)}, {'$set': {'likes': new_likes}})
 
     # 4. 하나의 영화만 영향을 받아야 하므로 result.updated_count 가 1이면  result = success 를 보냄
     if result.modified_count == 1:
