@@ -17,7 +17,7 @@
         <!-- CSS library 인 Bulma 를 포함합니다. -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
 
-        <!-- 텍스트형태로 되어있는 icon 을 쓸 수 있도록 Font awesome 을 포함합니다. -->
+        <!-- 텍스트형태로 되어있는 icon 을 쓸 수 있도록 Font awesome 을 포함하빈다. -->
         <script defer src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
 
         <title>마이 페이보릿 무비 | 프론트-백엔드 연결 마지막 예제!</title>
@@ -120,7 +120,7 @@
                         <img src="https://cataas.com/cat" class="movie-poster"/>
                         <span class="movie-title">${title}</span>
                         <span class="icon"><i class="fas fa-thumbs-up"></i></span><span class="movie-likes">${likes}</span>
-                        누적관객수 <span class="movie-viewers">${viewers} 명</span>
+                        누적관객수 <span class="movie-viewers">${viewers}</span> 명
                         개봉일 <span class="movie-date"></span>
                     `
 
@@ -128,19 +128,19 @@
                     let cardFooterHtml = ''
                     if (trashMode == false) {
                         cardFooterHtml = `
-                            <a href="#" onclick="likeMovie('')">
+                            <a href="#" onclick="likeMovie('${id}')">
                             위로!
                             </a>
-                            <a href="#" onclick="trashMovie('')">
+                            <a href="#" onclick="trashMovie('${id}')">
                             휴지통으로
                             </a>
                         `
                     } else {
                         cardFooterHtml = `
-                            <a href="#" onclick="restoreMovie()">
+                            <a href="#" onclick="restoreMovie('${id}')">
                             복구하기
                             </a>
-                            <a href="#" onclick="deleteMovie()">
+                            <a href="#" onclick="deleteMovie('${id}')">
                             영구삭제
                             </a>
                         `
@@ -159,11 +159,11 @@
             ///////////////////////////////////////////////////////////////////////////////
             // 주의: 아래 like movie 는 임의의 영화에 좋아요가 표시됩니다.
             // 이 구현을 선택한 무비에 좋아요를 넣는 것으로 수정하셔야 됩니다. (함수 매개변수 및 함수 구현 모두)
-            function likeMovie() {
+            function likeMovie(movieId) {
                 $.ajax({
                     type: "POST",
                     url: "/api/like",
-                    data: {},
+                    data: {'id': movieId},
                     success: function (response) {
                         if (response['result'] == 'success') {
                             // 2. '좋아요 완료!' 얼럿을 띄웁니다.
@@ -205,6 +205,16 @@
                 document.getElementById("sorter-likes").classList.remove("active")
                 document.getElementById("sorter-viewers").classList.remove("active")
                 document.getElementById("sorter-date").classList.remove("active")
+
+                if(sorMode == Sort.BY_LIKES) {
+                    document.getElementById("sorter-likes").classList.add("active")
+                }
+                else if(sorMode == Sort.BY_DATE) {
+                    document.getElementById("sorter-date").classList.add("active")
+                }
+                else if(sorMode == Sort.BY_VIEWERS) {
+                    document.getElementById("sorter-viwers").classList.add("active")
+                }
             }
 
             function displayTrashMode(trashMode) {
@@ -248,7 +258,6 @@
             <span class="d-flex justify-content-end">
                 <div id="trash-mode-box">
                     <!-- javascript 가 이 사이에 trash mode 에 따라 HTML element 를 생성해서 삽입합니다. -->
-                     <button type="button" class="btn btn-primary">휴지통 보기</button>
                 </div>
             </div>
         </div>
