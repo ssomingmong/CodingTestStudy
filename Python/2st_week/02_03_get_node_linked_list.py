@@ -30,4 +30,4 @@ class LinkedList:
 
 linked_list = LinkedList(5)
 linked_list.append(12)
-linked_list.get_node(0) # -> 5를 들고 있는 노드를 반환해야 합니다!
+linked_list.get_node(1) # -> 5를 들고 있는 노드를 반환해야 합니다!
