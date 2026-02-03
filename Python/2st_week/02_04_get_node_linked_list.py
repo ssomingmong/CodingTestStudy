@@ -13,7 +13,7 @@ class LinkedList:
         while cur.next is not None:
             cur = cur.next
         cur.next = Node(value)
-
+ 
     def print_all(self):
         cur = self.head
         while cur is not None:
